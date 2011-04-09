@@ -9,4 +9,7 @@
 
 ** Dependencies
    - Vala
-   - GTK 2
+   - GTK+ 2
+
+** License
+   Public domain.
