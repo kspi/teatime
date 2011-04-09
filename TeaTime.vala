@@ -8,6 +8,7 @@ public class TeaTime : Gtk.Window {
 
 		this.title = "Tea Timer";
 		this.border_width = 20;
+		this.set_keep_above(true);
 		this.hide.connect(Gtk.main_quit);
 		this.add(label);
 
