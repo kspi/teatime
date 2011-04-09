@@ -1,0 +1,12 @@
+* Tea Time
+  
+** Description
+   A simple tea timer.
+
+** Usage
+   Run /make/ to compile. The default time is 5 minutes. You can pass
+   a different time as a command-line option.
+
+** Dependencies
+   - Vala
+   - GTK 2
