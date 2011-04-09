@@ -11,11 +11,12 @@ public class TeaTime : Gtk.Window {
 		this.hide.connect(Gtk.main_quit);
 		this.add(label);
 
-		GLib.Timeout.add_seconds(1, this.every_second);
-		this.every_second();
+		GLib.Timeout.add(1000, this.update);
+		this.start();
+		this.update();
 	}
 
-	private bool every_second() {
+	private bool update() {
 		label.set_markup(this.format_time());		
 		return !this.tea_ready();
 	}
