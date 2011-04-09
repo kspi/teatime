@@ -9,17 +9,33 @@ public class TeaTime : Gtk.Window {
 		this.title = "Tea Timer";
 		this.border_width = 20;
 		this.set_keep_above(true);
-		this.hide.connect(Gtk.main_quit);
+		this.destroy.connect(Gtk.main_quit);
 		this.add(label);
 
-		GLib.Timeout.add(1000, this.update);
+		GLib.Timeout.add(500, this.update);
 		this.start();
 		this.update();
 	}
 
 	private bool update() {
-		label.set_markup(this.format_time());		
-		return !this.tea_ready();
+		if (this.tea_ready()) {
+			this.finish();
+			return false;
+		} else {
+			label.set_markup(this.format_time());		
+			return true;		// Continue running timer.
+		}
+	}
+
+	private void finish() {
+		this.hide();
+		var dialog = new Gtk.MessageDialog(this,
+										   0,
+										   Gtk.MessageType.INFO,
+										   Gtk.ButtonsType.CLOSE,
+										   "Tea is ready!");
+		dialog.run();
+		Gtk.main_quit();
 	}
 	
 	public void start() {
@@ -35,14 +51,10 @@ public class TeaTime : Gtk.Window {
 	}
 	
 	public string format_time() {
-		if (this.tea_ready()) {
-			return "<span font='Sans 30'>Tea is ready!</span>";
-		} else {
-			var t = this.seconds_left();
-			var m = t / 60;
-			var s = t % 60;
-			return "<span font='Monospace 50'>%u:%02u</span>".printf(m, s);
-		}
+		var t = this.seconds_left();
+		var m = t / 60;
+		var s = t % 60;
+		return "<span font='Monospace 50'>%u:%02u</span>".printf(m, s);
 	}
 
 	static void usage(string program) {
