@@ -24,7 +24,7 @@ class TeaTime.Main : GLib.Object {
             }
         }
         
-        var teatime = new TeaTime.Window(minutes * 60 + seconds);
+        var teatime = new TeaTime.Window(minutes, seconds);
         teatime.show_all();
 
         Gtk.main();

@@ -1,30 +1,22 @@
 public class TeaTime.Window : Gtk.Window {
-    private GLib.Timer timer = new GLib.Timer();
     private Gtk.Label label = new Gtk.Label(null);
-    private int period_length;
+	private TeaTime.Clock clock;
     
-    public Window(int period_length) {
-        this.period_length = period_length;
-
+    public Window(int minutes, int seconds) {
         this.title = "Tea Timer";
         this.border_width = 20;
         this.set_keep_above(true);
         this.destroy.connect(Gtk.main_quit);
         this.add(this.label);
 
-        GLib.Timeout.add(500, this.update);
-        this.start();
-        this.update();
+		clock = new TeaTime.Clock(minutes, seconds);
+		clock.update.connect(this.update);
+		clock.finish.connect(this.finish);
+		clock.start();
     }
 
-    private bool update() {
-        if (this.tea_ready()) {
-            this.finish();
-            return false;
-        } else {
-            this.label.set_markup(this.format_time());       
-            return true;        // Continue running timer.
-        }
+    private void update() {
+		this.label.set_markup(this.format_time());       
     }
 
     private void finish() {
@@ -38,22 +30,9 @@ public class TeaTime.Window : Gtk.Window {
         Gtk.main_quit();
     }
     
-    public void start() {
-        this.timer.start();
-    }
-
-    public int seconds_left() {
-        return this.period_length - (int)this.timer.elapsed();
-    }
-
-    public bool tea_ready() {
-        return this.seconds_left() <= 0;
-    }
-    
     public string format_time() {
-        var t = this.seconds_left();
-        var m = t / 60;
-        var s = t % 60;
-        return "<span font='Monospace 50'>%u:%02u</span>".printf(m, s);
+        return "<span font='Monospace 50'>%u:%02u</span>"
+		.printf(clock.minutes(),
+				clock.seconds());
     }
 }
