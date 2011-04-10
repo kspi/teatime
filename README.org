@@ -3,18 +3,24 @@
 ** Description
    A simple desktop timer application.
 
+** Screenshots
+*** Countdown
+    [[http://i.imgur.com/0tHGl.png]]
+*** Interactive interface
+    [[http://i.imgur.com/EnIuS.png]]
+
 ** Usage
    Run /make/ to compile. The executable is called /teatime/. To
    install, copy it somewhere in your /PATH/.
 
    You can pass a the time as a command-line option in format
-   /minutes/ or /minutes:seconds/ or /:seconds/. Then the timer starts
-   counting immediately. Otherwise the time period can be chosen
+   /minutes/ or /minutes:seconds/ or /:seconds/. Then the countdown is
+   started immediately. Otherwise the time period can be chosen
    interactively.
 
-   In the interactive interface, beside from using the graphical
-   buttons, the time period can be changed from the keyboard with the
-   arrow keys and the countdown can be started with the /Enter/ or
+   In the interactive interface, aside from using the graphical
+   buttons, the time period can also be changed using the arrow keys
+   on the keyboard. The countdown can be started with the /Enter/ or
    /Space/ keys.
 
 ** Dependencies
