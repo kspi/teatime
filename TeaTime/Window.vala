@@ -1,16 +1,16 @@
-public class TeaTime : Gtk.Window {
+public class TeaTime.Window : Gtk.Window {
     private GLib.Timer timer = new GLib.Timer();
     private Gtk.Label label = new Gtk.Label(null);
     private int period_length;
     
-    public TeaTime(int period_length) {
+    public Window(int period_length) {
         this.period_length = period_length;
 
         this.title = "Tea Timer";
         this.border_width = 20;
         this.set_keep_above(true);
         this.destroy.connect(Gtk.main_quit);
-        this.add(label);
+        this.add(this.label);
 
         GLib.Timeout.add(500, this.update);
         this.start();
@@ -22,7 +22,7 @@ public class TeaTime : Gtk.Window {
             this.finish();
             return false;
         } else {
-            label.set_markup(this.format_time());       
+            this.label.set_markup(this.format_time());       
             return true;        // Continue running timer.
         }
     }
@@ -55,38 +55,5 @@ public class TeaTime : Gtk.Window {
         var m = t / 60;
         var s = t % 60;
         return "<span font='Monospace 50'>%u:%02u</span>".printf(m, s);
-    }
-
-    static void usage(string program) {
-        GLib.stdout.printf("Usage: %s [ minutes | minutes:seconds ]\n", program);
-    }
-    
-    static int main(string[] args) {
-        Gtk.init(ref args);
-
-        var minutes = 5;
-        var seconds = 0;
-        
-        if (args.length > 1) {
-            if ((args[1] == "--help") || (args[1] == "-h")) {
-                TeaTime.usage(args[0]);
-                return 0;
-            } else {
-                var str = args[1];
-                var colon_index = str.index_of_char(':');
-                if (colon_index > 0) {
-                    str.scanf("%d:%d", out minutes, out seconds);
-                } else {
-                    str.scanf("%d", out minutes);
-                }
-            }
-        }
-        
-        var teatime = new TeaTime(minutes * 60 + seconds);
-        teatime.show_all();
-
-        Gtk.main();
-
-        return 0;
     }
 }

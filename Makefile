@@ -2,7 +2,9 @@ VALAC := valac
 
 VALAFLAGS := --pkg gtk+-2.0 --pkg glib-2.0
 
-teatime: TeaTime.vala
+SOURCES := $(shell echo */*.vala)
+
+teatime: $(SOURCES)
 	valac $(VALAFLAGS) -o $@ $^
 
 clean:
