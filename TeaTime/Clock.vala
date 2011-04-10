@@ -12,7 +12,7 @@ public class TeaTime.Clock : GLib.Object {
     public void start() {
         this.timer.start();
         this.update();
-        GLib.Timeout.add(1000, this.tick);
+        GLib.Timeout.add(100, this.tick);
     }
 
     private bool tick() {
