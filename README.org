@@ -5,11 +5,11 @@
 
 ** Screenshots
 *** Countdown
-    [[http://imgur.com/kaOfa]]
+    [[http://i.imgur.com/kaOfa.png]]
 *** Interactive interface
-    [[http://imgur.com/TIBZO]]
+    [[http://i.imgur.com/TIBZO.png]]
 *** Notification
-    [[http://imgur.com/tT3w9]]
+    [[http://i.imgur.com/tT3w9.png]]
 
 ** Usage
    Run /make/ to compile. The executable is called /teatime/. To
