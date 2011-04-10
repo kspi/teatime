@@ -5,9 +5,9 @@
 
 ** Screenshots
 *** Countdown
-    [[http://i.imgur.com/kaOfa.png]]
+    [[http://i.imgur.com/yTZzT.png]]
 *** Interactive interface
-    [[http://i.imgur.com/TIBZO.png]]
+    [[http://i.imgur.com/FXh5w.png]]
 *** Notification
     [[http://i.imgur.com/tT3w9.png]]
 
