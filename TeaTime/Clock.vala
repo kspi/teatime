@@ -10,27 +10,26 @@ public class TeaTime.Clock : GLib.Object {
     }
 
     public void start() {
-        this.timer.start();
-        this.update();
-        GLib.Timeout.add(100, this.tick);
+        timer.start();
+        update();
+        GLib.Timeout.add(100, tick);
     }
 
     private bool tick() {
-        if (this.finished()) {
-            this.finish();
+        if (finished()) {
+            finish();
             return false;
         } else {
-            this.update();
+            update();
             return true;
         }
     }
 
     public int time_left() {
-        return this.period - (int)this.timer.elapsed();
+        return period - (int)timer.elapsed();
     }
 
     public bool finished() {
-        return this.time_left() <= 0;
+        return time_left() <= 0;
     }
-    
 }
