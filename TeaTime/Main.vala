@@ -1,5 +1,5 @@
 class TeaTime.Main : GLib.Object {
-	static void usage(string program) {
+    static void usage(string program) {
         GLib.stdout.printf("Usage: %s [ minutes | minutes:seconds ]\n", program);
     }
     

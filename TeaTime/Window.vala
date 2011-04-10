@@ -1,6 +1,6 @@
 public class TeaTime.Window : Gtk.Window {
     private Gtk.Label label = new Gtk.Label(null);
-	private TeaTime.Clock clock;
+    private TeaTime.Clock clock;
     
     public Window(int minutes, int seconds) {
         this.title = "Tea Timer";
@@ -9,14 +9,14 @@ public class TeaTime.Window : Gtk.Window {
         this.destroy.connect(Gtk.main_quit);
         this.add(this.label);
 
-		clock = new TeaTime.Clock(minutes, seconds);
-		clock.update.connect(this.update);
-		clock.finish.connect(this.finish);
-		clock.start();
+        clock = new TeaTime.Clock(minutes, seconds);
+        clock.update.connect(this.update);
+        clock.finish.connect(this.finish);
+        clock.start();
     }
 
     private void update() {
-		this.label.set_markup(this.format_time());       
+        this.label.set_markup(this.format_time());       
     }
 
     private void finish() {
@@ -32,7 +32,7 @@ public class TeaTime.Window : Gtk.Window {
     
     public string format_time() {
         return "<span font='Monospace 50'>%u:%02u</span>"
-		.printf(clock.minutes(),
-				clock.seconds());
+        .printf(clock.minutes(),
+                clock.seconds());
     }
 }
