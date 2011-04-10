@@ -49,6 +49,7 @@ public class TeaTime.Window : Gtk.Window {
         sec_dec_button.clicked.connect(() => modify_seconds(-15));
 
         go_button.clicked.connect(start);
+        go_button.is_focus = true;
         
         update();
     }
