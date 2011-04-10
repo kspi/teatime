@@ -5,9 +5,11 @@
 
 ** Screenshots
 *** Countdown
-    [[http://i.imgur.com/0tHGl.png]]
+    http://imgur.com/kaOfa
 *** Interactive interface
-    [[http://i.imgur.com/EnIuS.png]]
+    http://imgur.com/TIBZO
+*** Notification
+    http://imgur.com/tT3w9
 
 ** Usage
    Run /make/ to compile. The executable is called /teatime/. To
@@ -22,6 +24,9 @@
    buttons, the time period can also be changed using the arrow keys
    on the keyboard. The countdown can be started with the /Enter/ or
    /Space/ keys.
+
+   When the countdown is complete, the program shows a notification
+   box. Depending on the system configuration, this may emit a sound.
 
 ** Dependencies
    - Vala
