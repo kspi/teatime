@@ -26,6 +26,7 @@ public class TeaTime.Window : Gtk.Window {
         border_width = 20;
         set_keep_above(true);
         destroy.connect(Gtk.main_quit);
+        key_press_event.connect(key_press);
         setup_style();
         add(hbox);
 
@@ -50,8 +51,37 @@ public class TeaTime.Window : Gtk.Window {
 
         go_button.clicked.connect(start);
         go_button.is_focus = true;
+        go_button.leave.connect(() => go_button.is_focus = true);
         
         update();
+    }
+
+    private static uint K_LEFT = Gdk.keyval_from_name("Left");
+    private static uint K_RIGHT = Gdk.keyval_from_name("Right");
+    private static uint K_UP = Gdk.keyval_from_name("Up");
+    private static uint K_DOWN = Gdk.keyval_from_name("Down");
+    private static uint K_RETURN = Gdk.keyval_from_name("Return");
+    private static uint K_SPACE = Gdk.keyval_from_name("Space");
+    
+    public bool key_press(Gdk.EventKey e) {
+        if (e.keyval == K_LEFT) {
+            modify_seconds(-15);
+            return true;
+        } else if (e.keyval == K_RIGHT) {
+            modify_seconds(15);
+            return true;
+        } else if (e.keyval == K_UP) {
+            modify_minutes(1);
+            return true;
+        } else if (e.keyval == K_DOWN) {
+            modify_minutes(-1);
+            return true;
+        } else if (e.keyval == K_RETURN || e.keyval == K_SPACE) {
+            start();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void modify_minutes(int diff) {
