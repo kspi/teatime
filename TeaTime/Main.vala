@@ -26,6 +26,7 @@ class TeaTime.Main : GLib.Object {
         
         var teatime = new TeaTime.Window(minutes, seconds);
         teatime.show_all();
+        if (args.length > 1) teatime.start();
 
         Gtk.main();
 

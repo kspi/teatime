@@ -5,8 +5,8 @@ public class TeaTime.Clock : GLib.Object {
     public signal void update();
     public signal void finish();
     
-    public Clock(int minutes, int seconds) {
-        this.period = minutes * 60 + seconds;
+    public Clock(int period) {
+        this.period = period;
     }
 
     public void start() {
@@ -25,16 +25,8 @@ public class TeaTime.Clock : GLib.Object {
         }
     }
 
-    private int time_left() {
+    public int time_left() {
         return this.period - (int)this.timer.elapsed();
-    }
-
-    public int minutes() {
-        return this.time_left() / 60;
-    }
-
-    public int seconds() {
-        return this.time_left() % 60;
     }
 
     public bool finished() {
