@@ -56,30 +56,25 @@ public class TeaTime.Window : Gtk.Window {
         update();
     }
 
-    private static uint K_LEFT = Gdk.keyval_from_name("Left");
-    private static uint K_RIGHT = Gdk.keyval_from_name("Right");
-    private static uint K_UP = Gdk.keyval_from_name("Up");
-    private static uint K_DOWN = Gdk.keyval_from_name("Down");
-    private static uint K_RETURN = Gdk.keyval_from_name("Return");
-    private static uint K_SPACE = Gdk.keyval_from_name("Space");
-    
     public bool key_press(Gdk.EventKey e) {
-        if (e.keyval == K_LEFT) {
+        switch (Gdk.keyval_name(e.keyval)) {
+        case "Left":
             modify_seconds(-15);
             return true;
-        } else if (e.keyval == K_RIGHT) {
+        case "Right":
             modify_seconds(15);
             return true;
-        } else if (e.keyval == K_UP) {
+        case "Up":
             modify_minutes(1);
             return true;
-        } else if (e.keyval == K_DOWN) {
+        case "Down":
             modify_minutes(-1);
             return true;
-        } else if (e.keyval == K_RETURN || e.keyval == K_SPACE) {
+        case "Return":
+        case "Space":
             start();
             return true;
-        } else {
+        default:
             return false;
         }
     }
