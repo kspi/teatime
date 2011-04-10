@@ -1,11 +1,21 @@
 * Tea Time
   
 ** Description
-   A simple tea timer.
+   A simple desktop timer application.
 
 ** Usage
-   Run /make/ to compile. The default time is 5 minutes. You can pass
-   a different time as a command-line option.
+   Run /make/ to compile. The executable is called /teatime/. To
+   install, copy it somewhere in your /PATH/.
+
+   You can pass a the time as a command-line option in format
+   /minutes/ or /minutes:seconds/ or /:seconds/. Then the timer starts
+   counting immediately. Otherwise the time period can be chosen
+   interactively.
+
+   In the interactive interface, beside from using the graphical
+   buttons, the time period can be changed from the keyboard with the
+   arrow keys and the countdown can be started with the /Enter/ or
+   /Space/ keys.
 
 ** Dependencies
    - Vala

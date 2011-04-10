@@ -22,7 +22,7 @@ public class TeaTime.Window : Gtk.Window {
     public Window(int m, int s) {
         period = m * 60 + s;
         
-        title = "Tea Timer";
+        title = "Tea Time";
         border_width = 20;
         set_keep_above(true);
         destroy.connect(Gtk.main_quit);
