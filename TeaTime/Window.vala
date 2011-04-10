@@ -1,14 +1,12 @@
 public class TeaTime.Window : Gtk.Window {
-    private Gtk.HBox hbox = new Gtk.HBox(false, 10);
+    private Gtk.Table table = new Gtk.Table(3, 4, false);
     
     private Gtk.Label colon_label = new Gtk.Label(":");
 
-    private Gtk.VBox min_box = new Gtk.VBox(false, 0);
     private Gtk.Label min_label = new Gtk.Label(null);
     private Gtk.Button min_inc_button = new Gtk.Button.with_label("▲");
     private Gtk.Button min_dec_button = new Gtk.Button.with_label("▼");
     
-    private Gtk.VBox sec_box = new Gtk.VBox(false, 0);
     private Gtk.Label sec_label = new Gtk.Label(null);
     private Gtk.Button sec_inc_button = new Gtk.Button.with_label("▲");
     private Gtk.Button sec_dec_button = new Gtk.Button.with_label("▼");
@@ -23,28 +21,30 @@ public class TeaTime.Window : Gtk.Window {
         period = m * 60 + s;
         
         title = "Tea Time";
-        border_width = 20;
+        border_width = 15;
         set_keep_above(true);
         destroy.connect(Gtk.main_quit);
         key_press_event.connect(key_press);
         setup_style();
-        add(hbox);
+        add(table);
 
-        hbox.pack_start(min_box);
-        hbox.pack_start(colon_label);
-        hbox.pack_start(sec_box);
-        hbox.pack_start(go_button);
+        const Gtk.AttachOptions attach_opts = Gtk.AttachOptions.SHRINK;
+        
+        table.attach(min_inc_button, 0, 1, 0, 1, attach_opts, attach_opts, 0, 0);
+        table.attach(sec_inc_button, 2, 3, 0, 1, attach_opts, attach_opts, 0, 0);
 
-        min_box.pack_start(min_inc_button);
-        min_box.pack_start(min_label);
-        min_box.pack_start(min_dec_button);
+        table.attach(min_label,   0, 1, 1, 2, attach_opts, attach_opts, 0, 2);
+        table.attach(colon_label, 1, 2, 1, 2, attach_opts, attach_opts, 0, 0);
+        table.attach(sec_label,   2, 3, 1, 2, attach_opts, attach_opts, 0, 2);
+        table.attach(go_button,   3, 4, 1, 2, attach_opts, attach_opts, 0, 0);
+        table.set_col_spacing(2, 20);
+
+        table.attach(min_dec_button, 0, 1, 2, 3, attach_opts, attach_opts, 0, 0);
+        table.attach(sec_dec_button, 2, 3, 2, 3, attach_opts, attach_opts, 0, 0);
+
 
         min_inc_button.clicked.connect(() => modify_minutes(1));
         min_dec_button.clicked.connect(() => modify_minutes(-1));
-
-        sec_box.pack_start(sec_inc_button);
-        sec_box.pack_start(sec_label);
-        sec_box.pack_start(sec_dec_button);
 
         sec_inc_button.clicked.connect(() => modify_seconds(15));
         sec_dec_button.clicked.connect(() => modify_seconds(-15));
@@ -105,6 +105,8 @@ public class TeaTime.Window : Gtk.Window {
             min_dec_button.hide();
             sec_inc_button.hide();
             sec_dec_button.hide();
+            table.set_col_spacing(2, 0);
+            border_width = 30;
             resize(1, 1);
             
             started = true;
@@ -132,7 +134,7 @@ public class TeaTime.Window : Gtk.Window {
         Gtk.Widget[] ws = { min_label, colon_label, sec_label };
         foreach (var w in ws) {
             w.modify_fg(Gtk.StateType.NORMAL, fg);
-            w.modify_font(Pango.FontDescription.from_string("Sans 36"));
+            w.modify_font(Pango.FontDescription.from_string("Sans 40"));
         }
         colon_label.modify_fg(Gtk.StateType.NORMAL, dark_fg);
 
@@ -145,7 +147,7 @@ public class TeaTime.Window : Gtk.Window {
             b.modify_bg(Gtk.StateType.PRELIGHT, bg);
             b.child.modify_fg(Gtk.StateType.NORMAL, dark_fg);
             b.child.modify_fg(Gtk.StateType.PRELIGHT, fg);
-            b.child.modify_font(Pango.FontDescription.from_string("Sans 26"));
+            b.child.modify_font(Pango.FontDescription.from_string("Sans 20"));
         }
 }
 
