@@ -50,8 +50,6 @@ public class TeaTime.Window : Gtk.Window {
         sec_dec_button.clicked.connect(() => modify_seconds(-15));
 
         go_button.clicked.connect(start);
-        go_button.is_focus = true;
-        go_button.leave.connect(() => go_button.is_focus = true);
         
         update();
     }
@@ -71,7 +69,7 @@ public class TeaTime.Window : Gtk.Window {
             modify_minutes(-1);
             return true;
         case "Return":
-        case "Space":
+        case "space":
             start();
             return true;
         default:
@@ -142,6 +140,7 @@ public class TeaTime.Window : Gtk.Window {
                             min_inc_button, min_dec_button,
                             sec_inc_button, sec_dec_button };
         foreach (var b in bs) {
+            b.can_focus = false;
             b.relief = Gtk.ReliefStyle.NONE;
             b.modify_bg(Gtk.StateType.PRELIGHT, bg);
             b.child.modify_fg(Gtk.StateType.NORMAL, dark_fg);
