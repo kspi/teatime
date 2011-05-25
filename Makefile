@@ -1,9 +1,25 @@
 VALAC := valac
-VALAFLAGS := --pkg gtk+-2.0 --pkg glib-2.0 --pkg gdk-2.0 --pkg pango
+
+PACKAGES := gtk+-3.0 gdk-3.0 pango
+
+VALAFLAGS := $(shell for p in $(PACKAGES); do echo --pkg $$p; done)
+CFLAGS := $(shell pkg-config --cflags $(PACKAGES))
+LDFLAGS := $(shell pkg-config --libs $(PACKAGES))
+
 SOURCES := $(wildcard */*.vala)
+CSOURCES := $(patsubst %.vala,%.c,$(SOURCES))
+OBJS := $(patsubst %.c,%.o,$(CSOURCES))
 
-teatime: $(SOURCES)
-	$(VALAC) $(VALAFLAGS) -o $@ $^
+teatime: $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
 
+%.c: %.vala
+	$(VALAC) $(VALAFLAGS) -C $(SOURCES)
+	touch $@
+
+.PHONY: csources
+csources: $(CSOURCES)
+
+.PHONY: clean
 clean:
-	rm -f teatime
+	rm -f $(CSOURCES) teatime $(OBJS)

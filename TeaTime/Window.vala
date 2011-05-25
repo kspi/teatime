@@ -145,9 +145,12 @@ public class TeaTime.Window : Gtk.Window {
             b.can_focus = false;
             b.relief = Gtk.ReliefStyle.NONE;
             b.modify_bg(Gtk.StateType.PRELIGHT, bg);
-            b.child.modify_fg(Gtk.StateType.NORMAL, dark_fg);
-            b.child.modify_fg(Gtk.StateType.PRELIGHT, fg);
-            b.child.modify_font(Pango.FontDescription.from_string("Sans 20"));
+            unowned Gtk.Widget label = b.get_child();
+            if (label != null) {
+                label.modify_fg(Gtk.StateType.NORMAL, dark_fg);
+                label.modify_fg(Gtk.StateType.PRELIGHT, fg);
+                label.modify_font(Pango.FontDescription.from_string("Sans 20"));
+            }
         }
 }
 
