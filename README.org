@@ -4,9 +4,9 @@
    A simple desktop timer application.
 
 ** Screenshots
-   [[http://i.imgur.com/DlOHw.png]]
-   [[http://i.imgur.com/Q4m1c.png]]
    [[http://i.imgur.com/R2jx5.png]]
+   [[http://i.imgur.com/Q4m1c.png]]
+   [[http://i.imgur.com/DlOHw.png]]
 
 ** Usage
    Run /make/ to compile. The executable is called /teatime/. To
