@@ -4,12 +4,20 @@ public class TeaTime.Window : Gtk.Window {
     private Gtk.Label colon_label = new Gtk.Label(":");
 
     private Gtk.Label min_label = new Gtk.Label(null);
-    private Gtk.Button min_inc_button = new Gtk.Button.with_label("▲");
-    private Gtk.Button min_dec_button = new Gtk.Button.with_label("▼");
+    private Gtk.Button min_inc_button = new Gtk.Button();
+    private Gtk.Arrow min_inc_arrow = new Gtk.Arrow(Gtk.ArrowType.UP,
+                                                    Gtk.ShadowType.NONE);
+    private Gtk.Button min_dec_button = new Gtk.Button();
+    private Gtk.Arrow min_dec_arrow = new Gtk.Arrow(Gtk.ArrowType.DOWN,
+                                                    Gtk.ShadowType.NONE);
     
     private Gtk.Label sec_label = new Gtk.Label(null);
-    private Gtk.Button sec_inc_button = new Gtk.Button.with_label("▲");
-    private Gtk.Button sec_dec_button = new Gtk.Button.with_label("▼");
+    private Gtk.Button sec_inc_button = new Gtk.Button();
+    private Gtk.Arrow sec_inc_arrow = new Gtk.Arrow(Gtk.ArrowType.UP,
+                                                    Gtk.ShadowType.NONE);
+    private Gtk.Button sec_dec_button = new Gtk.Button();
+    private Gtk.Arrow sec_dec_arrow = new Gtk.Arrow(Gtk.ArrowType.DOWN,
+                                                    Gtk.ShadowType.NONE);
     
     private Gtk.Button go_button = new Gtk.Button.with_label("Go!");
 
@@ -31,7 +39,9 @@ public class TeaTime.Window : Gtk.Window {
         const Gtk.AttachOptions attach_opts = Gtk.AttachOptions.SHRINK;
         
         table.attach(min_inc_button, 0, 1, 0, 1, attach_opts, attach_opts, 0, 0);
+        min_inc_button.add(min_inc_arrow);
         table.attach(sec_inc_button, 2, 3, 0, 1, attach_opts, attach_opts, 0, 0);
+        sec_inc_button.add(sec_inc_arrow);
 
         table.attach(min_label,   0, 1, 1, 2, attach_opts, attach_opts, 0, 2);
         table.attach(colon_label, 1, 2, 1, 2, attach_opts, attach_opts, 0, 0);
@@ -40,7 +50,9 @@ public class TeaTime.Window : Gtk.Window {
         table.set_col_spacing(2, 20);
 
         table.attach(min_dec_button, 0, 1, 2, 3, attach_opts, attach_opts, 0, 0);
+        min_dec_button.add(min_dec_arrow);
         table.attach(sec_dec_button, 2, 3, 2, 3, attach_opts, attach_opts, 0, 0);
+        sec_dec_button.add(sec_dec_arrow);
 
 
         min_inc_button.clicked.connect(() => modify_minutes(1));
