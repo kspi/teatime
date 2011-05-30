@@ -12,7 +12,7 @@ public class TeaTime.Window : Gtk.Window {
     private Gtk.Button sec_dec_button = new Gtk.Button.with_label("▼");
     
     private Gtk.Button go_button = new Gtk.Button.with_label("Go!");
-    
+
     private TeaTime.Clock clock;
     private int period;
     private bool started = false;
@@ -118,41 +118,41 @@ public class TeaTime.Window : Gtk.Window {
     }
 
     private void setup_style() {
-        Gdk.Color bg;
-        Gdk.Color.parse("black", out bg);
-
-        Gdk.Color button_bg;
-        Gdk.Color.parse("gray40", out button_bg);
-
-        Gdk.Color dark_fg;
-        Gdk.Color.parse("gray60", out dark_fg);
-        
-        Gdk.Color fg;
-        Gdk.Color.parse("gray90", out fg);
-
-        modify_bg(Gtk.StateType.NORMAL, bg);
-        Gtk.Widget[] ws = { min_label, colon_label, sec_label };
-        foreach (var w in ws) {
-            w.modify_fg(Gtk.StateType.NORMAL, fg);
-            w.modify_font(Pango.FontDescription.from_string("Sans 40"));
-        }
-        colon_label.modify_fg(Gtk.StateType.NORMAL, dark_fg);
-
-        Gtk.Button[] bs = { go_button,
-                            min_inc_button, min_dec_button,
-                            sec_inc_button, sec_dec_button };
-        foreach (var b in bs) {
-            b.can_focus = false;
-            b.relief = Gtk.ReliefStyle.NONE;
-            b.modify_bg(Gtk.StateType.PRELIGHT, bg);
-            unowned Gtk.Widget label = b.get_child();
-            if (label != null) {
-                label.modify_fg(Gtk.StateType.NORMAL, dark_fg);
-                label.modify_fg(Gtk.StateType.PRELIGHT, fg);
-                label.modify_font(Pango.FontDescription.from_string("Sans 20"));
-            }
-        }
+        // Setup CSS style
+        const string style = """
+.background {
+    background-image: -gtk-gradient(linear,
+                              0 0, 0 1,
+                              from(@bg_color),
+                              to(lighter(@bg_color)));
 }
+
+GtkTable GtkLabel {
+    font: Sans 40;
+}
+
+GtkTable .button {
+    font: Sans 20;
+}
+""";
+
+        var css_provider = new Gtk.CssProvider();
+        css_provider.load_from_data(style, style.length);
+        
+        var context = get_style_context();
+        context.add_provider_for_screen(Gdk.Screen.get_default(),
+                                        css_provider,
+                                        600);
+
+        // Arrow button behavior
+        Gtk.Button[] arrows = { min_inc_button, min_dec_button,
+                                sec_inc_button, sec_dec_button };
+        foreach (var b in arrows) {
+            b.set_relief(Gtk.ReliefStyle.NONE);
+            b.can_focus = false;
+        }
+        
+    }
 
     private void update() {
         min_label.set_label("%d".printf(minutes()));
