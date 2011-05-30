@@ -175,6 +175,7 @@ GtkTable .button * {
     }
 
     private void finish() {
+        update();
         present();
         var dialog = new Gtk.MessageDialog(this,
                                            0,
