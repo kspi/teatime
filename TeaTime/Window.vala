@@ -22,7 +22,7 @@ public class TeaTime.Window : Gtk.Window {
         
         title = "Tea Time";
         border_width = 15;
-        set_keep_above(true);
+        resizable = false;
         destroy.connect(Gtk.main_quit);
         key_press_event.connect(key_press);
         setup_style();
@@ -160,7 +160,7 @@ GtkTable .button {
     }
 
     private void finish() {
-        hide();
+        present();
         var dialog = new Gtk.MessageDialog(this,
                                            0,
                                            Gtk.MessageType.INFO,
