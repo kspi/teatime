@@ -131,27 +131,30 @@ GtkTable GtkLabel {
     font: Sans 40;
 }
 
-GtkTable .button {
+GtkTable .button * {
     font: Sans 20;
 }
 """;
 
         var css_provider = new Gtk.CssProvider();
-        css_provider.load_from_data(style, style.length);
-        
+        try {
+            css_provider.load_from_data(style, style.length);
+        } catch (GLib.Error e) {
+            error("Bad CSS.");
+        }
+
         var context = get_style_context();
         context.add_provider_for_screen(Gdk.Screen.get_default(),
                                         css_provider,
                                         600);
 
-        // Arrow button behavior
+            // Set arrow button behavior
         Gtk.Button[] arrows = { min_inc_button, min_dec_button,
                                 sec_inc_button, sec_dec_button };
         foreach (var b in arrows) {
             b.set_relief(Gtk.ReliefStyle.NONE);
             b.can_focus = false;
         }
-        
     }
 
     private void update() {
