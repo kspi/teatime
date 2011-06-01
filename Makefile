@@ -1,3 +1,5 @@
+VERSION := 1
+
 VALAC := valac
 
 PACKAGES := gtk+-3.0 gdk-3.0 pango
