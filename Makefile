@@ -25,3 +25,11 @@ csources: $(CSOURCES)
 .PHONY: clean
 clean:
 	rm -f $(CSOURCES) teatime $(OBJS)
+
+.PHONY: cdist
+cdist: clean csources
+	rm -rf teatime-c-$(VERSION).tar.bz2 teatime-c-$(VERSION)
+	mkdir teatime-c-$(VERSION)
+	cp -r Makefile README.org TeaTime teatime-c-$(VERSION)
+	tar -jcvf teatime-c-$(VERSION).tar.bz2 teatime-c-$(VERSION)
+	@echo "teatime-c-$(VERSION).tar.bz2 is ready!"
