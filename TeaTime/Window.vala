@@ -100,14 +100,16 @@ public class TeaTime.Window : Gtk.Window {
         update();
     }
 
+    private int time() {
+        return started ? clock.time_left() : period;
+    }
+    
     public int minutes() {
-        var t = started ? clock.time_left() : period;
-        return t / 60;
+        return time() / 60;
     }
     
     public int seconds() {
-        var t = started ? clock.time_left() : period;
-        return t % 60;
+        return time() % 60;
     }
 
     public void start() {
