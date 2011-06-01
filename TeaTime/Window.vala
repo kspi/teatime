@@ -151,7 +151,7 @@ GtkTable .button * {
         var css_provider = new Gtk.CssProvider();
         try {
             css_provider.load_from_data(style, style.length);
-        } catch (GLib.Error e) {
+        } catch (Error e) {
             error("Bad CSS.");
         }
 

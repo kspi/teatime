@@ -1,5 +1,5 @@
-public class TeaTime.Clock : GLib.Object {
-    private GLib.Timer timer = new GLib.Timer();
+public class TeaTime.Clock : Object {
+    private Timer timer = new Timer();
     private int period;
 
     public signal void update();
@@ -12,7 +12,7 @@ public class TeaTime.Clock : GLib.Object {
     public void start() {
         timer.start();
         update();
-        GLib.Timeout.add(100, tick);
+        Timeout.add(100, tick);
     }
 
     private bool tick() {

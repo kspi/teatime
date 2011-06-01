@@ -1,13 +1,13 @@
-class TeaTime.Main : GLib.Object {
+class TeaTime.Main : Object {
     static int main(string[] args) {
         Gtk.init(ref args);
 
-        var context = new GLib.OptionContext("[MINUTES | MINUTES:SECONDS | :SECONDS] ");
+        var context = new OptionContext("[MINUTES | MINUTES:SECONDS | :SECONDS] ");
         context.set_description("If time is not given on the commandline, ask" +
                                 " interactively. Otherwise start countdown immediately.");
         try {
             context.parse(ref args);
-        } catch (GLib.OptionError e) {
+        } catch (OptionError e) {
             // We don't care if we fail to parse an option.
         }
 
