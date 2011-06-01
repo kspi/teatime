@@ -26,8 +26,8 @@
    box. Depending on the system configuration, this may emit a sound.
 
 ** Dependencies
-   - Vala 0.12.0
    - GTK+ 3.0
+   - Vala 0.12.0 if compiling from Git repository
 
 ** License
    Public domain.
