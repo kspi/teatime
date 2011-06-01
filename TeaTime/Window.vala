@@ -83,7 +83,7 @@ public class TeaTime.Window : Gtk.Window {
         case "Return":
         case "space":
             start();
-            return true;
+        return true;
         default:
             return false;
         }
@@ -136,9 +136,9 @@ public class TeaTime.Window : Gtk.Window {
         const string style = """
 .background {
     background-image: -gtk-gradient(linear,
-                              0 0, 0 1,
-                              from(@bg_color),
-                              to(lighter(@bg_color)));
+                                    0 0, 0 1,
+                                    from(@bg_color),
+                                    to(lighter(@bg_color)));
 }
 
 GtkTable GtkLabel {
@@ -162,7 +162,7 @@ GtkTable .button * {
                                         css_provider,
                                         600);
 
-            // Set arrow button behavior
+        // Set arrow button behavior
         Gtk.Button[] arrows = { min_inc_button, min_dec_button,
                                 sec_inc_button, sec_dec_button };
         foreach (var b in arrows) {
