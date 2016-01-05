@@ -157,10 +157,9 @@ GtkTable .button * {
             error("Bad CSS.");
         }
 
-        var context = get_style_context();
-        context.add_provider_for_screen(Gdk.Screen.get_default(),
-                                        css_provider,
-                                        600);
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
+                                                 css_provider,
+                                                 600);
 
         // Set arrow button behavior
         Gtk.Button[] arrows = { min_inc_button, min_dec_button,
