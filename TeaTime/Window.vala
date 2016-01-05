@@ -3,21 +3,19 @@ public class TeaTime.Window : Gtk.Window {
     
     private Gtk.Label colon_label = new Gtk.Label(":");
 
+    private const Gtk.IconSize ICON_SIZE = Gtk.IconSize.BUTTON;
+
     private Gtk.Label min_label = new Gtk.Label(null);
     private Gtk.Button min_inc_button = new Gtk.Button();
-    private Gtk.Arrow min_inc_arrow = new Gtk.Arrow(Gtk.ArrowType.UP,
-                                                    Gtk.ShadowType.NONE);
+    private Gtk.Image min_inc_arrow = new Gtk.Image.from_icon_name("pan-up-symbolic", ICON_SIZE);
     private Gtk.Button min_dec_button = new Gtk.Button();
-    private Gtk.Arrow min_dec_arrow = new Gtk.Arrow(Gtk.ArrowType.DOWN,
-                                                    Gtk.ShadowType.NONE);
+    private Gtk.Image min_dec_arrow = new Gtk.Image.from_icon_name("pan-down-symbolic", ICON_SIZE);
     
     private Gtk.Label sec_label = new Gtk.Label(null);
     private Gtk.Button sec_inc_button = new Gtk.Button();
-    private Gtk.Arrow sec_inc_arrow = new Gtk.Arrow(Gtk.ArrowType.UP,
-                                                    Gtk.ShadowType.NONE);
+    private Gtk.Image sec_inc_arrow = new Gtk.Image.from_icon_name("pan-up-symbolic", ICON_SIZE);
     private Gtk.Button sec_dec_button = new Gtk.Button();
-    private Gtk.Arrow sec_dec_arrow = new Gtk.Arrow(Gtk.ArrowType.DOWN,
-                                                    Gtk.ShadowType.NONE);
+    private Gtk.Image sec_dec_arrow = new Gtk.Image.from_icon_name("pan-down-symbolic", ICON_SIZE);
     
     private Gtk.Button go_button = new Gtk.Button.with_label("Go!");
 
