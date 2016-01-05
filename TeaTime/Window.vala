@@ -1,9 +1,9 @@
 public class TeaTime.Window : Gtk.Window {
-    private Gtk.Table table = new Gtk.Table(3, 4, false);
+    private Gtk.Grid grid = new Gtk.Grid();
     
     private Gtk.Label colon_label = new Gtk.Label(":");
 
-    private const Gtk.IconSize ICON_SIZE = Gtk.IconSize.BUTTON;
+    private const Gtk.IconSize ICON_SIZE = Gtk.IconSize.LARGE_TOOLBAR;
 
     private Gtk.Label min_label = new Gtk.Label(null);
     private Gtk.Button min_inc_button = new Gtk.Button();
@@ -17,7 +17,7 @@ public class TeaTime.Window : Gtk.Window {
     private Gtk.Button sec_dec_button = new Gtk.Button();
     private Gtk.Image sec_dec_arrow = new Gtk.Image.from_icon_name("pan-down-symbolic", ICON_SIZE);
     
-    private Gtk.Button go_button = new Gtk.Button.with_label("Go!");
+    private Gtk.Button start_button = new Gtk.Button.with_label("Start");
 
     private TeaTime.Clock clock;
     private int period;
@@ -32,25 +32,28 @@ public class TeaTime.Window : Gtk.Window {
         destroy.connect(Gtk.main_quit);
         key_press_event.connect(key_press);
         setup_style();
-        add(table);
+        add(grid);
 
-        const Gtk.AttachOptions attach_opts = Gtk.AttachOptions.SHRINK;
-        
-        table.attach(min_inc_button, 0, 1, 0, 1, attach_opts, attach_opts, 0, 0);
+        grid.attach(min_inc_button, 0, 0, 1, 1);
         min_inc_button.add(min_inc_arrow);
-        table.attach(sec_inc_button, 2, 3, 0, 1, attach_opts, attach_opts, 0, 0);
+        min_inc_button.halign = Gtk.Align.CENTER;
+        grid.attach(sec_inc_button, 2, 0, 1, 1);
         sec_inc_button.add(sec_inc_arrow);
+        sec_inc_button.halign = Gtk.Align.CENTER;
 
-        table.attach(min_label,   0, 1, 1, 2, attach_opts, attach_opts, 0, 2);
-        table.attach(colon_label, 1, 2, 1, 2, attach_opts, attach_opts, 0, 0);
-        table.attach(sec_label,   2, 3, 1, 2, attach_opts, attach_opts, 0, 2);
-        table.attach(go_button,   3, 4, 1, 2, attach_opts, attach_opts, 0, 0);
-        table.set_col_spacing(2, 20);
+        grid.attach(min_label,   0, 1, 1, 1); //, attach_opts, attach_opts, 0, 2);
+        grid.attach(colon_label, 1, 1, 1, 1); //, attach_opts, attach_opts, 0, 0);
+        grid.attach(sec_label,   2, 1, 1, 1); //, attach_opts, attach_opts, 0, 2);
+        grid.attach(start_button,   3, 1, 1, 1); //, attach_opts, attach_opts, 0, 0);
+        start_button.halign = Gtk.Align.CENTER;
+        start_button.margin_start = 20;
 
-        table.attach(min_dec_button, 0, 1, 2, 3, attach_opts, attach_opts, 0, 0);
+        grid.attach(min_dec_button, 0, 2, 1, 1); //, attach_opts, attach_opts, 0, 0);
         min_dec_button.add(min_dec_arrow);
-        table.attach(sec_dec_button, 2, 3, 2, 3, attach_opts, attach_opts, 0, 0);
+        min_dec_button.halign = Gtk.Align.CENTER;
+        grid.attach(sec_dec_button, 2, 2, 1, 1); //, attach_opts, attach_opts, 0, 0);
         sec_dec_button.add(sec_dec_arrow);
+        sec_dec_button.halign = Gtk.Align.CENTER;
 
 
         min_inc_button.clicked.connect(() => modify_minutes(1));
@@ -59,7 +62,7 @@ public class TeaTime.Window : Gtk.Window {
         sec_inc_button.clicked.connect(() => modify_seconds(15));
         sec_dec_button.clicked.connect(() => modify_seconds(-15));
 
-        go_button.clicked.connect(start);
+        start_button.clicked.connect(start);
         
         update();
     }
@@ -112,13 +115,12 @@ public class TeaTime.Window : Gtk.Window {
 
     public void start() {
         if (!started) {
-            go_button.hide();
+            start_button.hide();
             min_inc_button.hide();
             min_dec_button.hide();
             sec_inc_button.hide();
             sec_dec_button.hide();
-            table.set_col_spacing(2, 0);
-            border_width = 30;
+            border_width = 25;
             resize(1, 1);
             
             started = true;
@@ -132,19 +134,12 @@ public class TeaTime.Window : Gtk.Window {
     private void setup_style() {
         // Setup CSS style
         const string style = """
-.background {
-    background-image: -gtk-gradient(linear,
-                                    0 0, 0 1,
-                                    from(@bg_color),
-                                    to(lighter(@bg_color)));
-}
-
-GtkTable GtkLabel {
+GtkGrid GtkLabel {
     font: Sans 40;
 }
 
-GtkTable .button * {
-    font: Sans 20;
+GtkGrid .button * {
+    font: Sans 16;
 }
 """;
 
